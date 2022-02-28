@@ -18,11 +18,12 @@ csv形式の予定表（割り当て不可能な日を記入したもの）を�
 DB:SQLite  
 装飾：Bootstrap，CSS  
 コンテナ：Docker  
-プラットフォーム：Heroku  
+プラットフォーム：Google Cloud Run 
 ソルバー：CBC（Coin-or branch and cut，[Python-MIP](https://www.python-mip.com/)に同梱のもの）　　
 
 ## 使い方
 以下のURLよりアクセスしてください。
+https://scheduler-app-lcd4uvejba-uc.a.run.app/
 
 ### テンプレートのcsvファイルのダウンロードと割り当て可能日の記入
 このアプリではcsv形式の予定表をアップロードする必要があります。トップページよりテンプレートがダウンロード可能です。（テンプレートをクリックしてください。）
