@@ -1,0 +1,80 @@
+body {
+    background-color: #f5f5f5;
+}
+h4 {
+   margin-top: 20px;
+}
+input[type="search"] {
+    background-color: #f5f5f5;
+}
+.auth-main {
+    width: 400px;
+    margin-top: 45px;
+}
+.auth-main .card {
+    box-shadow: 0 12px 18px 2px rgba(34, 0, 51, 0.04), 0 6px 22px 4px
+    rgba(7, 48, 114, 0.12),
+    0 6px 10px -4px rgba(14, 13, 26, 0.12) !important;
+    border-radius: 16px;
+}
+.auth-main .auth-login {
+    height: 300px !important;
+}
+.auth-main .auth-signup {
+    height: 340px !important;
+}
+.auth-main header {
+    text-align: center;
+    margin: 30px 0 0 0;
+    font-size: 24px;
+}
+.auth-main section {
+    width: 300px;
+    margin: 10px auto;
+}
+.auth-flash {
+    font-size: 14px;
+    color: #9c1a1c;
+}
+.auth-input {
+        margin-top: 10px;
+}
+.auth-btn {
+    margin: 30px 0 0 0;
+}
+.search {
+    height: 28px !important;
+}
+.scheduler-main-content {
+    margin: 20px auto;
+    padding: 0;
+    margin-top: 0px;
+}
+.image-username {
+    padding-top: 15px;
+}
+.image-register-btn {
+    padding: 10px 47px 0 0;
+}
+.image-content header {
+    padding: 10px 10px 0 10px;
+}
+.image-content section {
+    padding: 10px 0;
+    margin: auto;
+}
+.image-content footer {
+    padding: 10px;
+}
+.image-content section img {
+    width: 100%;
+}
+.image-file {
+    display: none;
+}
+.image-submit {
+    margin-left: 10px;
+}
+.sc-table-head {
+    justify-content: center;
+}

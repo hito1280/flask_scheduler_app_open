@@ -1,0 +1,65 @@
+{% extends "scheduler/base.html" %}
+{% block title %}予定表生成{% endblock %}
+{% block nav %}
+{% endblock %}
+{% block content %}
+<div class="container-fluid">
+    <div class="card col-md-12 scheduler-main-content">
+        <h2>鍵閉め・ゴミ出し当番の割り振り</h2>
+        <form action="/schedule_decision" method=post enctype=multipart/form-data>
+            <input type="hidden" name="csrf_token" value="{{ csrf_token() }}" />
+            <p>予定表データ<input type=file name=csvfile></p>
+            <input type=submit value=当番表作成>
+        </form>
+
+        <!-- 2. 当番表をダウンロード、当番表を表示 -->
+        {% if solution_html %}
+
+        <p>予定表をもとに当番表を作成しました。</p>
+        <p>以下のリンクよりcsv形式の予定表とical形式のカレンダーファイルがダウンロードできます。</p>
+        <div class="form-inline">
+            <!-- 当番表をcsv形式でダウンロード -->
+            <form name=download action="/schedule_decision/download_csv" method=post enctype=multipart/form-data>
+                <input type="hidden" name="csrf_token" value="{{ csrf_token() }}" />
+                <input type=hidden name=solution_html value="{{ solution_html }}">
+                <p><input type=submit value=予定表></p>
+            </form>
+            <!-- カレンダーファイルをical形式でダウンロード -->
+            <form name=download action="/schedule_decision/download_ical" method=post enctype=multipart/form-data>
+                <input type="hidden" name="csrf_token" value="{{ csrf_token() }}" />
+                <input type=hidden name=solution_html value="{{ solution_html }}">
+                <input type=hidden name=L_gomisute_members value="{{ L_gomisute_members }}">
+                <p><input type=submit value=カレンダー></p>
+            </form>
+        </div>
+
+        <p>予定表をもとに作成した当番表は以下の通りです。</p>
+        <!-- 当番表を表示 -->
+        <div class="container">
+            <div class="table-responsive">
+                <table class="table-condensed table-bordered table-striped">
+                    <thead>
+                        <tr>
+                            <th class="sc-table-head">日付</th>
+                            {% for ind in solution_df.columns %}
+                            <th class="sc-table-head">{{ ind }}</th>
+                            {% endfor %}
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for row in solution_df.itertuples() %}
+                        <tr>
+                            <th>{{ row[0] }}</th>
+                            <td>{{ row[1] }}</td>
+                            <td>{{ row[2] }}</td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+    {% endif %}
+</div>
+
+{% endblock %}

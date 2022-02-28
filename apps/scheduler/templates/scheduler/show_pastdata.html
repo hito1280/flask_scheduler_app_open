@@ -1,0 +1,40 @@
+{% extends "scheduler/base.html" %}
+{% block title %}{% endblock %}
+{% block nav %}
+{% endblock %}
+{% block content %}
+<div class="container-fluid">
+    <div class="card col-md-12 scheduler-main-content">
+        <h2>{{ yyyymm[:4]+'年'+yyyymm[4:]+'月' }}の予定表</h2>
+
+        <p>過去に作成した{{ yyyymm[:4]+'年'+yyyymm[4:]+'月' }}の当番表は以下の通りです。</p>
+        <!-- 当番表を表示 -->
+        <div class="container">
+            <div class="table-responsive">
+                <table class="table-condensed table-bordered table-striped">
+                    <thead>
+                        <tr>
+                            <th class="sc-table-head">日付</th>
+                            <th class="sc-table-head">鍵閉め</th>
+                            <th class="sc-table-head">ごみ捨て</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for schedule in schedules %}
+                        <tr>
+                            <th>{{ schedule.date.date().strftime('%Y/%m/%d') }}</th>
+                            <td>{{ schedule.k_members }}</td>
+                            <td>{{ schedule.g_members }}</td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        <p></p>
+        <p></p>
+        <p></p>
+    </div>
+</div>
+
+{% endblock %}

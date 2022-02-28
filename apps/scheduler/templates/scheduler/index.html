@@ -1,0 +1,42 @@
+{% extends "scheduler/base.html" %}
+{% block nav %}
+<li class="sche_ind">home</li>
+{% endblock %}
+{% block content %}
+<div class="container-fluid">
+    <div class="card col-md-12 scheduler-main-content">
+        <h3>予定表生成</h3>
+        <p>csv形式でアップロードしたシフト希望をもとに予定表を生成します。</p>
+        <p></p>
+        <!-- シフト表のフォーマットcsvファイルをダウンロード． -->
+        <form name=download action="/download_template" method=post enctype=multipart/form-data>
+            <input type="hidden" name="csrf_token" value="{{ csrf_token() }}" />
+            <p>テンプレートファイルをダウンロード</p>
+            <input type=hidden name=solution_html value="{{ solution_html }}">
+            <p><input type=submit value=テンプレート></p>
+        </form>
+        <!-- ここまで． -->
+
+        <a href="{{ url_for('scheduler.schedule_decision') }}">新規予定表作成</a>
+        <p></p>
+        <!-- 過去の予定表リスト． -->
+        {% if current_user.is_authenticated %}
+        <p>予定表作成済みの月は以下の通りです。</p>
+        <p>過去に決定した予定は以下より参照できます。</p>
+        {% for schedule in schedulelists %}
+        <div class="past schedule list">
+            <!-- 過去の予定表のURLに変更する． -->
+            <a
+                href="{{ url_for('scheduler.show_pastdata', user_id=schedule.User.id, yyyymm=schedule.ScheduleLists.yyyymm, user_schedule=schedule) }}">
+                {{ schedule.ScheduleLists.yyyymm[:4]+"年"+schedule.ScheduleLists.yyyymm[4:]+"月" }}
+            </a>
+        </div>
+        {% endfor %}
+        {% else %}
+        <p>ログインすることで過去の予定表を保存可能です。</p>
+        {% endif %}
+        <!-- ここまで． -->
+    </div>
+
+</div>
+{% endblock %}
